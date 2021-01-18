@@ -9,20 +9,31 @@
 
 <body>
   <div id="app">
-    <p>Original message: {{ message }}</p>
-    <p>Reversed message: {{ reversedMessage }}</p>
+    <ul>
+      <li v-for="name in names" v-text="name"></li>
+    </ul>
+    <input type="text" v-model="newName">
+    <button @click="addName">Add name</button>
   </div>
 
   <script>
     let app = new Vue({
       el: '#app',
       data: {
-        message: 'Hello Vue!',
+        newName: '',
+        names: [
+          'Jack', 'Mary', 'Jane', 'Joe',
+        ],
       },
-      computed: {
-        reversedMessage: function () {
-          return this.message.split('').reverse().join('');
-        },
+      methods: {
+        addName() {
+          if (this.newName === '') {
+            return;
+          }
+
+          this.names.push(this.newName);
+          this.newName = '';
+        }
       },
     });
   </script>
