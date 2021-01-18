@@ -9,35 +9,20 @@
 
 <body>
   <div id="app">
-    <ol>
-      <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id">
-      </todo-item>
-    </ol>
+    <p>Original message: {{ message }}</p>
+    <p>Reversed message: {{ reversedMessage }}</p>
   </div>
 
   <script>
-    Vue.component('todo-item', {
-      props: ['todo'],
-      template: '<li>{{ todo.text }}</li>',
-    });
-
     let app = new Vue({
       el: '#app',
       data: {
-        groceryList: [
-          {
-            id: 0,
-            text: 'Vegetable',
-          },
-          {
-            id: 1,
-            text: 'Cheese',
-          },
-          {
-            id: 2,
-            text: 'Whatever else humans are supposed to eat',
-          },
-        ],
+        message: 'Hello Vue!',
+      },
+      computed: {
+        reversedMessage: function () {
+          return this.message.split('').reverse().join('');
+        },
       },
     });
   </script>
