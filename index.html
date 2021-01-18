@@ -8,36 +8,36 @@
 </head>
 
 <body>
-  <div id="app" v-bind:title="title">
-    <p>{{ message }}</p>
-    <input v-model="message">
-    <p v-if="seen">Now you see me</p>
+  <div id="app">
     <ol>
-      <li v-for="todo in todos">
-        {{ todo.text }}
-      </li>
+      <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id">
+      </todo-item>
     </ol>
-    <button v-on:click="reverseMessage">Reverse message</button>
   </div>
 
   <script>
-    const now = new Date();
+    Vue.component('todo-item', {
+      props: ['todo'],
+      template: '<li>{{ todo.text }}</li>',
+    });
+
     let app = new Vue({
       el: '#app',
       data: {
-        title: `You loaded this page on ${now.toLocaleString()}`,
-        message: 'Hello Vue!',
-        seen: true,
-        todos: [
-          { text: 'Learn JavaScript' },
-          { text: 'Learn Vue' },
-          { text: 'Build something awesome' },
+        groceryList: [
+          {
+            id: 0,
+            text: 'Vegetable',
+          },
+          {
+            id: 1,
+            text: 'Cheese',
+          },
+          {
+            id: 2,
+            text: 'Whatever else humans are supposed to eat',
+          },
         ],
-      },
-      methods: {
-        reverseMessage: function () {
-          this.message = this.message.split('').reverse().join('');
-        },
       },
     });
   </script>
