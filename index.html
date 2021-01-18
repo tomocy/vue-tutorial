@@ -10,6 +10,12 @@
 <body>
   <div id="app" v-bind:title="title">
     {{ message }}
+    <p v-if="seen">Now you see me</p>
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
   </div>
 
   <script>
@@ -19,6 +25,12 @@
       data: {
         title: `You loaded this page on ${now.toLocaleString()}`,
         message: 'Hello Vue!',
+        seen: true,
+        todos: [
+          { text: 'Learn JavaScript' },
+          { text: 'Learn Vue' },
+          { text: 'Build something awesome' },
+        ],
       },
     });
   </script>
