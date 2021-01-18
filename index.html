@@ -8,17 +8,19 @@
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" v-bind:title="title">
     {{ message }}
   </div>
 
   <script>
+    const now = new Date();
     let app = new Vue({
       el: '#app',
       data: {
+        title: `You loaded this page on ${now.toLocaleString()}`,
         message: 'Hello Vue!',
       },
-    })
+    });
   </script>
 </body>
 
