@@ -10,25 +10,79 @@
 
 <body>
   <div id="app">
-    <message text="Lorem ipsum dolor sit amet"></message>
-    <message text="Bla bla bla"></message>
+    <tabs>
+      <tab name="About us" selected="true">
+        <h1>Here is the content of about us tab</h1>
+      </tab>
+      <tab name="About our culture">
+        <h1>Here is the content of about our culture tab</h1>
+      </tab>
+      <tab name="About our vision">
+        <h1>Here is the content of about our vision tab</h1>
+      </tab>
+    </tabs>
   </div>
 
   <script>
-    Vue.component('message', {
-      props: ['text'],
+    Vue.component('tabs', {
       template: `
-      <div class="notification" v-show="isVisible">
-        <button class="delete" @click="isVisible = false"></button>
-        {{ text }}
-      </div>
+        <div>
+          <div class="tabs">
+            <ul>
+              <li v-for="tab in tabs" @click="selectTab(tab)" :class="{ 'is-active': tab.isSelected }">
+                <a :href="tab.href" v-text="tab.name"></a>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-details">
+            <slot></slot>
+          </div>
+        </div>
       `,
       data() {
         return {
-          isVisible: true,
+          tabs: [],
+        }
+      },
+      created() {
+        this.tabs = this.$children;
+      },
+      methods: {
+        selectTab(selected) {
+          for (let tab of this.tabs) {
+            tab.isSelected = tab.name == selected.name;
+          }
         }
       },
     });
+
+    Vue.component('tab', {
+      props: {
+        name: {
+          required: true
+        },
+        selected: {
+          default: false
+        },
+      },
+      template: `
+      <div v-show="isSelected"><slot></slot></div>
+      `,
+      data() {
+        return {
+          isSelected: false,
+        };
+      },
+      mounted() {
+        this.isSelected = this.selected;
+      },
+      computed: {
+        href() {
+          return `#${this.name.toLowerCase().replace(/ /g, '-')}`;
+        }
+      },
+    })
+
 
     let app = new Vue({
       el: '#app',
