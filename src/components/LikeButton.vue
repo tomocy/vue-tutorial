@@ -5,16 +5,16 @@
 <script>
 export default {
   name: "LikeButton",
-  data() {
-    return {
-      active: false,
-    };
-  },
   props: {
     liked: {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      active: this.liked,
+    };
   },
   computed: {
     classes() {
@@ -33,9 +33,6 @@ export default {
     toggle() {
       this.active = !this.active;
     },
-  },
-  created() {
-    this.active = this.liked;
   },
 };
 </script>

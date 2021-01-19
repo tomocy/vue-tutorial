@@ -7,7 +7,7 @@
       <p class="subtitle">{{ author }}</p>
     </div>
     <footer class="card-footer">
-      <like-button></like-button>
+      <like-button :liked="liked"></like-button>
     </footer>
   </div>
 </template>
@@ -26,6 +26,10 @@ export default {
     body: {
       type: String,
       required: true,
+    },
+    liked: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

@@ -8,7 +8,11 @@
         ></quote-item>
       </div>
       <div class="column">
-        <quote-item author="Jeff Atwood" body='"ra ri ru re ro"'></quote-item>
+        <quote-item
+          author="Jeff Atwood"
+          body='"ra ri ru re ro"'
+          liked
+        ></quote-item>
       </div>
     </div>
   </div>
