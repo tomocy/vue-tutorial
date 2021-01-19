@@ -1,22 +1,18 @@
 <template>
   <div class="container">
-    <div class="columns">
-      <template v-for="(quote, i) in quotes">
-        <div class="column" :key="i">
-          <quote-item :quote="quote"></quote-item>
-        </div>
-      </template>
-    </div>
+    <quote-list :quotes="quotes"></quote-list>
   </div>
 </template>
 
 <script>
 import Quote from "../models/quote";
-import QuoteItem from "./QuoteItem.vue";
+import QuoteList from "./QuoteList";
 
 export default {
-  components: { QuoteItem },
   name: "HelloWorld",
+  components: {
+    QuoteList,
+  },
   data() {
     return {
       quotes: [
